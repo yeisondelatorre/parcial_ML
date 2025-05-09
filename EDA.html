@@ -1,0 +1,2386 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>EDA - Fraudes Transaccionales &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'EDA';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Content with notebooks" href="notebooks.html" />
+    <link rel="prev" title="Parcial Aprendizaje de Máquinas - Maestría en Analítica de datos" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Parcial Aprendizaje de Máquinas - Maestría en Analítica de datos
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">EDA - Fraudes Transaccionales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FEDA.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/EDA.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>EDA - Fraudes Transaccionales</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#union-del-conjunto-de-datos">Union del conjunto de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteccion-de-fraude">Detección de fraude</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-tipos-de-variables">Resumen de Tipos de Variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#renombramiento-de-las-variables">Renombramiento de las variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estadisticas-basicas-media-desviacion-cuartiles-etc">Estadísticas Básicas (Media, Desviación, Cuartiles, etc.)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-faltantes">Valores faltantes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histograma-4-variables">Histograma 4 variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imputacion">Imputacion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-dimensionalidad-a-las-variables-categoricas-con-la-prueba-chi-2">Reducción de dimensionalidad a las variables categóricas con la prueba <span class="math notranslate nohighlight">\(chi^2\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#onehotencoder-a-las-columnas-significativas">OneHotEncoder a las columnas significativas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vif">VIF</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="eda-fraudes-transaccionales">
+<h1>EDA - Fraudes Transaccionales<a class="headerlink" href="#eda-fraudes-transaccionales" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">StratifiedKFold</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">OneHotEncoder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.impute</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimpleImputer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.compose</span><span class="w"> </span><span class="kn">import</span> <span class="n">ColumnTransformer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">,</span>
+    <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">ConfusionMatrixDisplay</span><span class="p">,</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">auc</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skopt</span><span class="w"> </span><span class="kn">import</span> <span class="n">BayesSearchCV</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skopt.space</span><span class="w"> </span><span class="kn">import</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Real</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.outliers_influence</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance_inflation_factor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">chi2_contingency</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carga los archivos CSV en DataFrames</span>
+<span class="n">train_transaction</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;train_transaction.csv&quot;</span><span class="p">)</span>
+<span class="n">test_transaction</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;test_transaction.csv&quot;</span><span class="p">)</span>
+<span class="n">train_identity</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;train_identity.csv&quot;</span><span class="p">)</span>
+<span class="n">test_identity</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;test_identity.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="union-del-conjunto-de-datos">
+<h2>Union del conjunto de datos<a class="headerlink" href="#union-del-conjunto-de-datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unión de los DataFrames de entrenamiento y prueba</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">train_transaction</span><span class="p">,</span> <span class="n">train_identity</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;TransactionID&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">test_transaction</span><span class="p">,</span> <span class="n">test_identity</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;TransactionID&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;TransactionID&#39;, &#39;isFraud&#39;, &#39;TransactionDT&#39;, &#39;TransactionAmt&#39;,
+       &#39;ProductCD&#39;, &#39;card1&#39;, &#39;card2&#39;, &#39;card3&#39;, &#39;card4&#39;, &#39;card5&#39;,
+       ...
+       &#39;id_31&#39;, &#39;id_32&#39;, &#39;id_33&#39;, &#39;id_34&#39;, &#39;id_35&#39;, &#39;id_36&#39;, &#39;id_37&#39;, &#39;id_38&#39;,
+       &#39;DeviceType&#39;, &#39;DeviceInfo&#39;],
+      dtype=&#39;object&#39;, length=434)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;TransactionID&#39;, &#39;TransactionDT&#39;, &#39;TransactionAmt&#39;, &#39;ProductCD&#39;,
+       &#39;card1&#39;, &#39;card2&#39;, &#39;card3&#39;, &#39;card4&#39;, &#39;card5&#39;, &#39;card6&#39;,
+       ...
+       &#39;id-31&#39;, &#39;id-32&#39;, &#39;id-33&#39;, &#39;id-34&#39;, &#39;id-35&#39;, &#39;id-36&#39;, &#39;id-37&#39;, &#39;id-38&#39;,
+       &#39;DeviceType&#39;, &#39;DeviceInfo&#39;],
+      dtype=&#39;object&#39;, length=433)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Con la finalidad de hacer un EDA correctamente y preprocesamiento es decir una imputación y codificación coherente en ambos datasets para evitar problemas en el modelo de machine learning (por ejemplo, columnas diferentes después de OneHotEncoder) se procede a concatenar la base de datos, puesto que existen columnas como ‘id_31’ vs ‘id-31’, lo que indica que hay inconsistencias en nombres entre los datasets. Es mejor unificar esto antes de cualquier análisis</p>
+<p><strong>Unificar nombres de columnas</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Para garantizar mas adelante la partición de los datos como estaban se añade una columna llamada isTrain que marque si la fila es del set de entrenamiento o de prueba.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;isTrain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;isTrain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">train</span><span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Por si acaso</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Concatenar</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TransactionID</th>
+      <th>isFraud</th>
+      <th>TransactionDT</th>
+      <th>TransactionAmt</th>
+      <th>ProductCD</th>
+      <th>card1</th>
+      <th>card2</th>
+      <th>card3</th>
+      <th>card4</th>
+      <th>card5</th>
+      <th>...</th>
+      <th>id_32</th>
+      <th>id_33</th>
+      <th>id_34</th>
+      <th>id_35</th>
+      <th>id_36</th>
+      <th>id_37</th>
+      <th>id_38</th>
+      <th>DeviceType</th>
+      <th>DeviceInfo</th>
+      <th>isTrain</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2987000</td>
+      <td>0.0</td>
+      <td>86400</td>
+      <td>68.500</td>
+      <td>W</td>
+      <td>13926</td>
+      <td>NaN</td>
+      <td>150.0</td>
+      <td>discover</td>
+      <td>142.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2987001</td>
+      <td>0.0</td>
+      <td>86401</td>
+      <td>29.000</td>
+      <td>W</td>
+      <td>2755</td>
+      <td>404.0</td>
+      <td>150.0</td>
+      <td>mastercard</td>
+      <td>102.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2987002</td>
+      <td>0.0</td>
+      <td>86469</td>
+      <td>59.000</td>
+      <td>W</td>
+      <td>4663</td>
+      <td>490.0</td>
+      <td>150.0</td>
+      <td>visa</td>
+      <td>166.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2987003</td>
+      <td>0.0</td>
+      <td>86499</td>
+      <td>50.000</td>
+      <td>W</td>
+      <td>18132</td>
+      <td>567.0</td>
+      <td>150.0</td>
+      <td>mastercard</td>
+      <td>117.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2987004</td>
+      <td>0.0</td>
+      <td>86506</td>
+      <td>50.000</td>
+      <td>H</td>
+      <td>4497</td>
+      <td>514.0</td>
+      <td>150.0</td>
+      <td>mastercard</td>
+      <td>102.0</td>
+      <td>...</td>
+      <td>32.0</td>
+      <td>2220x1080</td>
+      <td>match_status:2</td>
+      <td>T</td>
+      <td>F</td>
+      <td>T</td>
+      <td>T</td>
+      <td>mobile</td>
+      <td>SAMSUNG SM-G892A Build/NRD90M</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1097226</th>
+      <td>4170235</td>
+      <td>NaN</td>
+      <td>34214279</td>
+      <td>94.679</td>
+      <td>C</td>
+      <td>13832</td>
+      <td>375.0</td>
+      <td>185.0</td>
+      <td>mastercard</td>
+      <td>224.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1097227</th>
+      <td>4170236</td>
+      <td>NaN</td>
+      <td>34214287</td>
+      <td>12.173</td>
+      <td>C</td>
+      <td>3154</td>
+      <td>408.0</td>
+      <td>185.0</td>
+      <td>mastercard</td>
+      <td>224.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>F</td>
+      <td>F</td>
+      <td>T</td>
+      <td>F</td>
+      <td>mobile</td>
+      <td>ALE-L23 Build/HuaweiALE-L23</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1097228</th>
+      <td>4170237</td>
+      <td>NaN</td>
+      <td>34214326</td>
+      <td>49.000</td>
+      <td>W</td>
+      <td>16661</td>
+      <td>490.0</td>
+      <td>150.0</td>
+      <td>visa</td>
+      <td>226.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1097229</th>
+      <td>4170238</td>
+      <td>NaN</td>
+      <td>34214337</td>
+      <td>202.000</td>
+      <td>W</td>
+      <td>16621</td>
+      <td>516.0</td>
+      <td>150.0</td>
+      <td>mastercard</td>
+      <td>224.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1097230</th>
+      <td>4170239</td>
+      <td>NaN</td>
+      <td>34214345</td>
+      <td>24.346</td>
+      <td>C</td>
+      <td>5713</td>
+      <td>168.0</td>
+      <td>144.0</td>
+      <td>visa</td>
+      <td>147.0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>F</td>
+      <td>F</td>
+      <td>T</td>
+      <td>F</td>
+      <td>mobile</td>
+      <td>SAMSUNG</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>1097231 rows × 435 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Información básica del DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;El conjunto de datos tiene </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas y </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">train</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>El conjunto de datos tiene 1097231 filas y 435 columnas.
+
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 590540 entries, 0 to 590539
+Columns: 435 entries, TransactionID to isTrain
+dtypes: float64(399), int64(5), object(31)
+memory usage: 1.9+ GB
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="deteccion-de-fraude">
+<h2>Detección de fraude<a class="headerlink" href="#deteccion-de-fraude" title="Link to this heading">#</a></h2>
+<p>el conjunto de datos cuenta con las siguientes descripciones de las variables.</p>
+<ul class="simple">
+<li><p><em>TransactionDT</em> : Intervalo de tiempo a partir de una fecha y hora de referencia</p></li>
+<li><p><em>TransactionAMT</em> : Importe del pago de la transacción en USD</p></li>
+<li><p><em>ProductCD</em>: Código de producto, el producto de cada transacción</p></li>
+<li><p><em>card1 - card6</em> : Información de la tarjeta de pago, como tipo de tarjeta, categoría de tarjeta, banco emisor, país, etc.</p></li>
+<li><p><em>addr:</em> Dirección</p></li>
+<li><p><em>dist:</em> Distancia</p></li>
+<li><p><em>P_ and (R_) emaildomain</em>: Dominio de correo electrónico del comprador y del destinatario</p></li>
+<li><p><em>C1-C14</em> : Recuento, cuántas direcciones se encuentran asociadas a la tarjeta de pago, etc. El significado real está codificado.</p></li>
+<li><p><em>D1-D15</em>: Intervalo de tiempo, como los días transcurridos entre la transacción anterior, etc.</p></li>
+<li><p><em>M1-M9</em>: Coinciden, como los nombres en la tarjeta y la dirección, etc.</p></li>
+<li><p><em>Vxxx</em>: Vesta ofrece una gran variedad de funciones, como la clasificación, el recuento y otras relaciones
+entre entidades.</p></li>
+<li><p><em>DeviceType</em>: Codificada. Información de identidad o conexión de red (IP, ISP, Proxy, etc) o firma digital</p></li>
+<li><p><em>DeviceInfo</em>: Codificada. Información de identidad o conexión de red (IP, ISP, Proxy, etc) o firma digital</p></li>
+<li><p><em>id_12 - id_38</em> : Codificada. Información de identidad o conexión de red (IP, ISP, Proxy, etc) o firma
+digital</p></li>
+</ul>
+<p>Donde el conjunto de entrenamiento cuenta 1097231 observaciones con <em>434</em> variables, con una estructura de <strong>399</strong> son enteros, <strong>4</strong> de dichas variables son decimales y <strong>31</strong> de ellas caracteres o texto específicamente</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Listas de columnas por tipo lógico (según la descripción y nombre de columnas)</span>
+<span class="n">columnas_numericas_continuas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TransactionAmt&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;C</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;D</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)]</span>
+<span class="n">columnas_categoricas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ProductCD&#39;</span><span class="p">,</span> <span class="s1">&#39;card1&#39;</span><span class="p">,</span> <span class="s1">&#39;card2&#39;</span><span class="p">,</span> <span class="s1">&#39;card3&#39;</span><span class="p">,</span> <span class="s1">&#39;card4&#39;</span><span class="p">,</span> <span class="s1">&#39;card5&#39;</span><span class="p">,</span> <span class="s1">&#39;card6&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;addr1&#39;</span><span class="p">,</span> <span class="s1">&#39;addr2&#39;</span><span class="p">,</span> <span class="s1">&#39;P_emaildomain&#39;</span><span class="p">,</span> <span class="s1">&#39;R_emaildomain&#39;</span><span class="p">,</span> 
+                        <span class="s1">&#39;DeviceType&#39;</span><span class="p">,</span> <span class="s1">&#39;DeviceInfo&#39;</span><span class="p">]</span>
+<span class="n">columnas_binarias</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;M</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>  <span class="c1"># Suelen ser &quot;match/no match&quot;</span>
+<span class="n">columnas_codificadas</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;V</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">340</span><span class="p">)]</span>  <span class="c1"># Variables generadas por Vesta</span>
+<span class="n">columnas_id</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;id_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">39</span><span class="p">)]</span>  <span class="c1"># Variables de identidad</span>
+<span class="n">columna_objetivo</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">]</span>
+<span class="n">columna_tiempo</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TransactionDT&#39;</span><span class="p">]</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Resumen de tipos de variables:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- Variables numéricas continuas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">columnas_numericas_continuas</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- Variables categóricas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">columnas_categoricas</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- Variables binarias: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">columnas_binarias</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- Variables codificadas por Vesta (V1-V339): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">columnas_codificadas</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- Variables de identidad (id_12 a id_38): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">columnas_id</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- Variable objetivo: </span><span class="si">{</span><span class="n">columna_objetivo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- Variable temporal: </span><span class="si">{</span><span class="n">columna_tiempo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resumen de tipos de variables:
+- Variables numéricas continuas: 30
+- Variables categóricas: 13
+- Variables binarias: 9
+- Variables codificadas por Vesta (V1-V339): 339
+- Variables de identidad (id_12 a id_38): 27
+- Variable objetivo: [&#39;isFraud&#39;]
+- Variable temporal: [&#39;TransactionDT&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">categorical_cols</span> <span class="o">=</span> <span class="n">columnas_categoricas</span> <span class="o">+</span> <span class="n">columnas_binarias</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">categorical_cols</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">train</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">train</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="resumen-de-tipos-de-variables">
+<h3>Resumen de Tipos de Variables<a class="headerlink" href="#resumen-de-tipos-de-variables" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tipo de Variable</p></th>
+<th class="head"><p>Cantidad</p></th>
+<th class="head"><p>Descripción breve</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Numéricas continuas</strong></p></td>
+<td><p>30</p></td>
+<td><p>Variables como montos (<code class="docutils literal notranslate"><span class="pre">TransactionAmt</span></code>), conteos (<code class="docutils literal notranslate"><span class="pre">C1–C14</span></code>) y diferencias temporales (<code class="docutils literal notranslate"><span class="pre">D1–D15</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Categóricas</strong></p></td>
+<td><p>13</p></td>
+<td><p>Incluyen tipos de productos (<code class="docutils literal notranslate"><span class="pre">ProductCD</span></code>), tarjetas (<code class="docutils literal notranslate"><span class="pre">card1–card6</span></code>), correos electrónicos, etc.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Binarias</strong></p></td>
+<td><p>9</p></td>
+<td><p>Variables de tipo sí/no como coincidencias de datos (<code class="docutils literal notranslate"><span class="pre">M1–M9</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Codificadas por Vesta (V1–V339)</strong></p></td>
+<td><p>339</p></td>
+<td><p>Variables anónimas derivadas por el proveedor, relacionadas con patrones y relaciones internas.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Variables de identidad (id_12–id_38)</strong></p></td>
+<td><p>27</p></td>
+<td><p>Información del dispositivo, conexión, IP, sistema operativo, etc.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Variable objetivo</strong></p></td>
+<td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">isFraud</span></code>, indica si una transacción es fraudulenta (<code class="docutils literal notranslate"><span class="pre">1</span></code>) o no (<code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Variable temporal</strong></p></td>
+<td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TransactionDT</span></code>, representa el tiempo como un número entero desde un punto base.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="renombramiento-de-las-variables">
+<h2>Renombramiento de las variables<a class="headerlink" href="#renombramiento-de-las-variables" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Diccionario de renombramiento donde tr = transaction</span>
+<span class="n">renombrar_columnas</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;TransactionID&#39;</span><span class="p">:</span> <span class="s1">&#39;trID&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TransactionDT&#39;</span><span class="p">:</span> <span class="s1">&#39;Time_tr&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TransactionAmt&#39;</span><span class="p">:</span> <span class="s1">&#39;Monto&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ProductCD&#39;</span><span class="p">:</span> <span class="s1">&#39;TipoProducto&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;card1&#39;</span><span class="p">:</span> <span class="s1">&#39;Tarjeta1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;card2&#39;</span><span class="p">:</span> <span class="s1">&#39;Tarjeta2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;card3&#39;</span><span class="p">:</span> <span class="s1">&#39;Tarjeta3&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;card4&#39;</span><span class="p">:</span> <span class="s1">&#39;TipoTarjeta&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;card5&#39;</span><span class="p">:</span> <span class="s1">&#39;Tarjeta5&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;card6&#39;</span><span class="p">:</span> <span class="s1">&#39;CategoriaTarjeta&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;addr1&#39;</span><span class="p">:</span> <span class="s1">&#39;Direccion1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;addr2&#39;</span><span class="p">:</span> <span class="s1">&#39;Direccion2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dist1&#39;</span><span class="p">:</span> <span class="s1">&#39;Distancia1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dist2&#39;</span><span class="p">:</span> <span class="s1">&#39;Distancia2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;P_emaildomain&#39;</span><span class="p">:</span> <span class="s1">&#39;EmailComprador&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;R_emaildomain&#39;</span><span class="p">:</span> <span class="s1">&#39;EmailReceptor&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;DeviceType&#39;</span><span class="p">:</span> <span class="s1">&#39;TipoDispositivo&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;DeviceInfo&#39;</span><span class="p">:</span> <span class="s1">&#39;InfoDispositivo&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;isFraud&#39;</span><span class="p">:</span> <span class="s1">&#39;EsFraude&#39;</span>
+<span class="p">}</span>
+
+
+<span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">renombrar_columnas</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">renombrar_columnas</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="estadisticas-basicas-media-desviacion-cuartiles-etc">
+<h2>Estadísticas Básicas (Media, Desviación, Cuartiles, etc.)<a class="headerlink" href="#estadisticas-basicas-media-desviacion-cuartiles-etc" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estadisticas_numericas</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="n">estadisticas_numericas</span> <span class="o">=</span> <span class="n">estadisticas_numericas</span><span class="p">[[</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;25%&#39;</span><span class="p">,</span> <span class="s1">&#39;50%&#39;</span><span class="p">,</span> <span class="s1">&#39;75%&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">]]</span>
+<span class="n">estadisticas_numericas</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># Puedes ajustar el número de filas a mostrar</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>trID</th>
+      <td>1097231.0</td>
+      <td>3.575333e+06</td>
+      <td>3.544294e+05</td>
+      <td>2987000.000</td>
+      <td>3261307.5</td>
+      <td>3535615.00</td>
+      <td>3895931.5</td>
+      <td>4.170239e+06</td>
+    </tr>
+    <tr>
+      <th>EsFraude</th>
+      <td>590540.0</td>
+      <td>3.499001e-02</td>
+      <td>1.837546e-01</td>
+      <td>0.000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>1.000000e+00</td>
+    </tr>
+    <tr>
+      <th>Time_tr</th>
+      <td>1097231.0</td>
+      <td>1.640384e+07</td>
+      <td>1.081612e+07</td>
+      <td>86400.000</td>
+      <td>6651887.0</td>
+      <td>14491621.00</td>
+      <td>26513228.5</td>
+      <td>3.421434e+07</td>
+    </tr>
+    <tr>
+      <th>Monto</th>
+      <td>1097231.0</td>
+      <td>1.348879e+02</td>
+      <td>2.422407e+02</td>
+      <td>0.018</td>
+      <td>42.0</td>
+      <td>67.95</td>
+      <td>125.0</td>
+      <td>3.193739e+04</td>
+    </tr>
+    <tr>
+      <th>Tarjeta1</th>
+      <td>1097231.0</td>
+      <td>9.925744e+03</td>
+      <td>4.893776e+03</td>
+      <td>1000.000</td>
+      <td>6019.0</td>
+      <td>9749.00</td>
+      <td>14247.5</td>
+      <td>1.839700e+04</td>
+    </tr>
+    <tr>
+      <th>Tarjeta2</th>
+      <td>1079644.0</td>
+      <td>3.630998e+02</td>
+      <td>1.582079e+02</td>
+      <td>100.000</td>
+      <td>210.0</td>
+      <td>361.00</td>
+      <td>512.0</td>
+      <td>6.000000e+02</td>
+    </tr>
+    <tr>
+      <th>Tarjeta3</th>
+      <td>1092664.0</td>
+      <td>1.533556e+02</td>
+      <td>1.186064e+01</td>
+      <td>100.000</td>
+      <td>150.0</td>
+      <td>150.00</td>
+      <td>150.0</td>
+      <td>2.320000e+02</td>
+    </tr>
+    <tr>
+      <th>Tarjeta5</th>
+      <td>1088425.0</td>
+      <td>1.996868e+02</td>
+      <td>4.093358e+01</td>
+      <td>100.000</td>
+      <td>166.0</td>
+      <td>226.00</td>
+      <td>226.0</td>
+      <td>2.370000e+02</td>
+    </tr>
+    <tr>
+      <th>Direccion1</th>
+      <td>965916.0</td>
+      <td>2.912419e+02</td>
+      <td>1.018895e+02</td>
+      <td>100.000</td>
+      <td>204.0</td>
+      <td>299.00</td>
+      <td>330.0</td>
+      <td>5.400000e+02</td>
+    </tr>
+    <tr>
+      <th>Direccion2</th>
+      <td>965916.0</td>
+      <td>8.676537e+01</td>
+      <td>2.830234e+00</td>
+      <td>10.000</td>
+      <td>87.0</td>
+      <td>87.00</td>
+      <td>87.0</td>
+      <td>1.020000e+02</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Interpretación de Variables (Estadísticas Básicas)</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Variable</strong></p></th>
+<th class="head"><p><strong>Interpretación clave</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">EsFraude</span></code> (<code class="docutils literal notranslate"><span class="pre">isFraud</span></code>)</p></td>
+<td><p>Es la variable objetivo (0 = no fraude, 1 = fraude). Su media es <strong>0.03499</strong>, lo que indica que <strong>solo el 3.5% de las transacciones son fraudes</strong>, y el 96.5% no lo son. Esto confirma que el <strong>dataset altamente desbalanceado</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Time_tr</span></code> (<code class="docutils literal notranslate"><span class="pre">TransactionDT</span></code>)</p></td>
+<td><p>Representa el tiempo en segundos desde una fecha base. La media es ~7.3 millones de segundos (~85 días), y los valores van desde 86,400 (1 día) hasta 15.8 millones (~183 días). La cual usaremos mas adelante si es necesario para crear variables como hora, día de la semana, etc.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Monto</span></code> (<code class="docutils literal notranslate"><span class="pre">TransactionAmt</span></code>)</p></td>
+<td><p>El importe promedio de una transacción es **<span class="math notranslate nohighlight">\(135**, pero hay mucha dispersión (std = 239), con montos tan bajos como \)</span>0.25 y tan altos como <span class="math notranslate nohighlight">\(31,937. El 75% de las transacciones no superan los \)</span>125. Hay valores <strong>muy extremos</strong> que podrían ser outliers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Distancia1</span></code></p></td>
+<td><p>Distancia entre dirección de facturación y envío, posiblemente geográfica. Solo hay ~238 mil valores no nulos. El promedio es 118, pero hay valores hasta 10,286. Posiblemente contiene outliers. Muy sesgada hacia valores bajos.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Distancia2</span></code></p></td>
+<td><p>Similar a <code class="docutils literal notranslate"><span class="pre">Distancia1</span></code>, pero aún más incompleta (solo 37,627 valores). Tiene una distribución similar pero aún más dispersa.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">C1</span></code> a <code class="docutils literal notranslate"><span class="pre">C4</span></code></p></td>
+<td><p>Variables de conteo o categorizadas. Por ejemplo, <code class="docutils literal notranslate"><span class="pre">C1</span></code> y <code class="docutils literal notranslate"><span class="pre">C2</span></code> tienen una media baja (~14-15), pero una desviación enorme (~130-150). Esto sugiere que la mayoría de los valores son pequeños (como 1), pero hay casos con valores muy grandes (hasta 4,685 y 5,691). Las columnas como <code class="docutils literal notranslate"><span class="pre">C3</span></code> y <code class="docutils literal notranslate"><span class="pre">C4</span></code> tienen mediana 0, lo que sugiere que la mayoría de valores son 0, aunque hay algunos casos raros con valores altos, indicando <strong>distribuciones muy sesgadas</strong> y posibles <strong>outliers</strong>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="valores-faltantes">
+<h3>Valores faltantes<a class="headerlink" href="#valores-faltantes" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Grupos de variables que mostraron 100% de columnas con NaNs</span>
+<span class="n">grupos_con_100_nulos</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Contadores_C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;C</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">)],</span>
+    <span class="s1">&#39;Dias_D&#39;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;D</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)],</span>
+    <span class="s1">&#39;Coincidencias_M&#39;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;M</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)],</span>
+    <span class="s1">&#39;Vesta_V&#39;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;V</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">340</span><span class="p">)],</span>
+    <span class="s1">&#39;Identidad_id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;id_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">39</span><span class="p">)],</span>
+<span class="p">}</span>
+
+<span class="c1"># Calcular el porcentaje de nulos por columna para estos grupos</span>
+<span class="k">for</span> <span class="n">grupo</span><span class="p">,</span> <span class="n">columnas</span> <span class="ow">in</span> <span class="n">grupos_con_100_nulos</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Porcentaje de valores nulos en el grupo: </span><span class="si">{</span><span class="n">grupo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">columnas_presentes</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columnas</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">columnas_presentes</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  No hay columnas de este grupo presentes en el DataFrame.&quot;</span><span class="p">)</span>
+        <span class="k">continue</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columnas_presentes</span><span class="p">:</span>
+        <span class="n">porcentaje_nulos</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Columna &#39;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">porcentaje_nulos</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Porcentaje de valores nulos en el grupo: Contadores_C
+  - Columna &#39;C1&#39;: 0.00%
+  - Columna &#39;C2&#39;: 0.00%
+  - Columna &#39;C3&#39;: 0.00%
+  - Columna &#39;C4&#39;: 0.00%
+  - Columna &#39;C5&#39;: 0.00%
+  - Columna &#39;C6&#39;: 0.00%
+  - Columna &#39;C7&#39;: 0.00%
+  - Columna &#39;C8&#39;: 0.00%
+  - Columna &#39;C9&#39;: 0.00%
+  - Columna &#39;C10&#39;: 0.00%
+  - Columna &#39;C11&#39;: 0.00%
+  - Columna &#39;C12&#39;: 0.00%
+  - Columna &#39;C13&#39;: 0.43%
+  - Columna &#39;C14&#39;: 0.00%
+
+Porcentaje de valores nulos en el grupo: Dias_D
+  - Columna &#39;D1&#39;: 0.67%
+  - Columna &#39;D2&#39;: 46.99%
+  - Columna &#39;D3&#39;: 42.47%
+  - Columna &#39;D4&#39;: 22.40%
+  - Columna &#39;D5&#39;: 48.69%
+  - Columna &#39;D6&#39;: 81.96%
+  - Columna &#39;D7&#39;: 90.97%
+  - Columna &#39;D8&#39;: 86.40%
+  - Columna &#39;D9&#39;: 86.40%
+  - Columna &#39;D10&#39;: 8.07%
+  - Columna &#39;D11&#39;: 41.54%
+  - Columna &#39;D12&#39;: 87.79%
+  - Columna &#39;D13&#39;: 83.11%
+  - Columna &#39;D14&#39;: 83.83%
+  - Columna &#39;D15&#39;: 9.22%
+
+Porcentaje de valores nulos en el grupo: Coincidencias_M
+  - Columna &#39;M1&#39;: 40.81%
+  - Columna &#39;M2&#39;: 40.81%
+  - Columna &#39;M3&#39;: 40.81%
+  - Columna &#39;M4&#39;: 47.32%
+  - Columna &#39;M5&#39;: 60.16%
+  - Columna &#39;M6&#39;: 29.92%
+  - Columna &#39;M7&#39;: 52.98%
+  - Columna &#39;M8&#39;: 52.97%
+  - Columna &#39;M9&#39;: 52.97%
+
+Porcentaje de valores nulos en el grupo: Vesta_V
+  - Columna &#39;V1&#39;: 41.54%
+  - Columna &#39;V2&#39;: 41.54%
+  - Columna &#39;V3&#39;: 41.54%
+  - Columna &#39;V4&#39;: 41.54%
+  - Columna &#39;V5&#39;: 41.54%
+  - Columna &#39;V6&#39;: 41.54%
+  - Columna &#39;V7&#39;: 41.54%
+  - Columna &#39;V8&#39;: 41.54%
+  - Columna &#39;V9&#39;: 41.54%
+  - Columna &#39;V10&#39;: 41.54%
+  - Columna &#39;V11&#39;: 41.54%
+  - Columna &#39;V12&#39;: 8.08%
+  - Columna &#39;V13&#39;: 8.08%
+  - Columna &#39;V14&#39;: 8.08%
+  - Columna &#39;V15&#39;: 8.08%
+  - Columna &#39;V16&#39;: 8.08%
+  - Columna &#39;V17&#39;: 8.08%
+  - Columna &#39;V18&#39;: 8.08%
+  - Columna &#39;V19&#39;: 8.08%
+  - Columna &#39;V20&#39;: 8.08%
+  - Columna &#39;V21&#39;: 8.08%
+  - Columna &#39;V22&#39;: 8.08%
+  - Columna &#39;V23&#39;: 8.08%
+  - Columna &#39;V24&#39;: 8.08%
+  - Columna &#39;V25&#39;: 8.08%
+  - Columna &#39;V26&#39;: 8.08%
+  - Columna &#39;V27&#39;: 8.08%
+  - Columna &#39;V28&#39;: 8.08%
+  - Columna &#39;V29&#39;: 8.08%
+  - Columna &#39;V30&#39;: 8.08%
+  - Columna &#39;V31&#39;: 8.08%
+  - Columna &#39;V32&#39;: 8.08%
+  - Columna &#39;V33&#39;: 8.08%
+  - Columna &#39;V34&#39;: 8.08%
+  - Columna &#39;V35&#39;: 22.40%
+  - Columna &#39;V36&#39;: 22.40%
+  - Columna &#39;V37&#39;: 22.40%
+  - Columna &#39;V38&#39;: 22.40%
+  - Columna &#39;V39&#39;: 22.40%
+  - Columna &#39;V40&#39;: 22.40%
+  - Columna &#39;V41&#39;: 22.40%
+  - Columna &#39;V42&#39;: 22.40%
+  - Columna &#39;V43&#39;: 22.40%
+  - Columna &#39;V44&#39;: 22.40%
+  - Columna &#39;V45&#39;: 22.40%
+  - Columna &#39;V46&#39;: 22.40%
+  - Columna &#39;V47&#39;: 22.40%
+  - Columna &#39;V48&#39;: 22.40%
+  - Columna &#39;V49&#39;: 22.40%
+  - Columna &#39;V50&#39;: 22.40%
+  - Columna &#39;V51&#39;: 22.40%
+  - Columna &#39;V52&#39;: 22.40%
+  - Columna &#39;V53&#39;: 8.20%
+  - Columna &#39;V54&#39;: 8.20%
+  - Columna &#39;V55&#39;: 8.20%
+  - Columna &#39;V56&#39;: 8.20%
+  - Columna &#39;V57&#39;: 8.20%
+  - Columna &#39;V58&#39;: 8.20%
+  - Columna &#39;V59&#39;: 8.20%
+  - Columna &#39;V60&#39;: 8.20%
+  - Columna &#39;V61&#39;: 8.20%
+  - Columna &#39;V62&#39;: 8.20%
+  - Columna &#39;V63&#39;: 8.20%
+  - Columna &#39;V64&#39;: 8.20%
+  - Columna &#39;V65&#39;: 8.20%
+  - Columna &#39;V66&#39;: 8.20%
+  - Columna &#39;V67&#39;: 8.20%
+  - Columna &#39;V68&#39;: 8.20%
+  - Columna &#39;V69&#39;: 8.20%
+  - Columna &#39;V70&#39;: 8.20%
+  - Columna &#39;V71&#39;: 8.20%
+  - Columna &#39;V72&#39;: 8.20%
+  - Columna &#39;V73&#39;: 8.20%
+  - Columna &#39;V74&#39;: 8.20%
+  - Columna &#39;V75&#39;: 9.23%
+  - Columna &#39;V76&#39;: 9.23%
+  - Columna &#39;V77&#39;: 9.23%
+  - Columna &#39;V78&#39;: 9.23%
+  - Columna &#39;V79&#39;: 9.23%
+  - Columna &#39;V80&#39;: 9.23%
+  - Columna &#39;V81&#39;: 9.23%
+  - Columna &#39;V82&#39;: 9.23%
+  - Columna &#39;V83&#39;: 9.23%
+  - Columna &#39;V84&#39;: 9.23%
+  - Columna &#39;V85&#39;: 9.23%
+  - Columna &#39;V86&#39;: 9.23%
+  - Columna &#39;V87&#39;: 9.23%
+  - Columna &#39;V88&#39;: 9.23%
+  - Columna &#39;V89&#39;: 9.23%
+  - Columna &#39;V90&#39;: 9.23%
+  - Columna &#39;V91&#39;: 9.23%
+  - Columna &#39;V92&#39;: 9.23%
+  - Columna &#39;V93&#39;: 9.23%
+  - Columna &#39;V94&#39;: 9.23%
+  - Columna &#39;V95&#39;: 0.03%
+  - Columna &#39;V96&#39;: 0.03%
+  - Columna &#39;V97&#39;: 0.03%
+  - Columna &#39;V98&#39;: 0.03%
+  - Columna &#39;V99&#39;: 0.03%
+  - Columna &#39;V100&#39;: 0.03%
+  - Columna &#39;V101&#39;: 0.03%
+  - Columna &#39;V102&#39;: 0.03%
+  - Columna &#39;V103&#39;: 0.03%
+  - Columna &#39;V104&#39;: 0.03%
+  - Columna &#39;V105&#39;: 0.03%
+  - Columna &#39;V106&#39;: 0.03%
+  - Columna &#39;V107&#39;: 0.03%
+  - Columna &#39;V108&#39;: 0.03%
+  - Columna &#39;V109&#39;: 0.03%
+  - Columna &#39;V110&#39;: 0.03%
+  - Columna &#39;V111&#39;: 0.03%
+  - Columna &#39;V112&#39;: 0.03%
+  - Columna &#39;V113&#39;: 0.03%
+  - Columna &#39;V114&#39;: 0.03%
+  - Columna &#39;V115&#39;: 0.03%
+  - Columna &#39;V116&#39;: 0.03%
+  - Columna &#39;V117&#39;: 0.03%
+  - Columna &#39;V118&#39;: 0.03%
+  - Columna &#39;V119&#39;: 0.03%
+  - Columna &#39;V120&#39;: 0.03%
+  - Columna &#39;V121&#39;: 0.03%
+  - Columna &#39;V122&#39;: 0.03%
+  - Columna &#39;V123&#39;: 0.03%
+  - Columna &#39;V124&#39;: 0.03%
+  - Columna &#39;V125&#39;: 0.03%
+  - Columna &#39;V126&#39;: 0.03%
+  - Columna &#39;V127&#39;: 0.03%
+  - Columna &#39;V128&#39;: 0.03%
+  - Columna &#39;V129&#39;: 0.03%
+  - Columna &#39;V130&#39;: 0.03%
+  - Columna &#39;V131&#39;: 0.03%
+  - Columna &#39;V132&#39;: 0.03%
+  - Columna &#39;V133&#39;: 0.03%
+  - Columna &#39;V134&#39;: 0.03%
+  - Columna &#39;V135&#39;: 0.03%
+  - Columna &#39;V136&#39;: 0.03%
+  - Columna &#39;V137&#39;: 0.03%
+  - Columna &#39;V138&#39;: 85.62%
+  - Columna &#39;V139&#39;: 85.62%
+  - Columna &#39;V140&#39;: 85.62%
+  - Columna &#39;V141&#39;: 85.62%
+  - Columna &#39;V142&#39;: 85.62%
+  - Columna &#39;V143&#39;: 85.60%
+  - Columna &#39;V144&#39;: 85.60%
+  - Columna &#39;V145&#39;: 85.60%
+  - Columna &#39;V146&#39;: 85.62%
+  - Columna &#39;V147&#39;: 85.62%
+  - Columna &#39;V148&#39;: 85.62%
+  - Columna &#39;V149&#39;: 85.62%
+  - Columna &#39;V150&#39;: 85.60%
+  - Columna &#39;V151&#39;: 85.60%
+  - Columna &#39;V152&#39;: 85.60%
+  - Columna &#39;V153&#39;: 85.62%
+  - Columna &#39;V154&#39;: 85.62%
+  - Columna &#39;V155&#39;: 85.62%
+  - Columna &#39;V156&#39;: 85.62%
+  - Columna &#39;V157&#39;: 85.62%
+  - Columna &#39;V158&#39;: 85.62%
+  - Columna &#39;V159&#39;: 85.60%
+  - Columna &#39;V160&#39;: 85.60%
+  - Columna &#39;V161&#39;: 85.62%
+  - Columna &#39;V162&#39;: 85.62%
+  - Columna &#39;V163&#39;: 85.62%
+  - Columna &#39;V164&#39;: 85.60%
+  - Columna &#39;V165&#39;: 85.60%
+  - Columna &#39;V166&#39;: 85.60%
+  - Columna &#39;V167&#39;: 74.81%
+  - Columna &#39;V168&#39;: 74.81%
+  - Columna &#39;V169&#39;: 74.83%
+  - Columna &#39;V170&#39;: 74.83%
+  - Columna &#39;V171&#39;: 74.83%
+  - Columna &#39;V172&#39;: 74.81%
+  - Columna &#39;V173&#39;: 74.81%
+  - Columna &#39;V174&#39;: 74.83%
+  - Columna &#39;V175&#39;: 74.83%
+  - Columna &#39;V176&#39;: 74.81%
+  - Columna &#39;V177&#39;: 74.81%
+  - Columna &#39;V178&#39;: 74.81%
+  - Columna &#39;V179&#39;: 74.81%
+  - Columna &#39;V180&#39;: 74.83%
+  - Columna &#39;V181&#39;: 74.81%
+  - Columna &#39;V182&#39;: 74.81%
+  - Columna &#39;V183&#39;: 74.81%
+  - Columna &#39;V184&#39;: 74.83%
+  - Columna &#39;V185&#39;: 74.83%
+  - Columna &#39;V186&#39;: 74.81%
+  - Columna &#39;V187&#39;: 74.81%
+  - Columna &#39;V188&#39;: 74.83%
+  - Columna &#39;V189&#39;: 74.83%
+  - Columna &#39;V190&#39;: 74.81%
+  - Columna &#39;V191&#39;: 74.81%
+  - Columna &#39;V192&#39;: 74.81%
+  - Columna &#39;V193&#39;: 74.81%
+  - Columna &#39;V194&#39;: 74.83%
+  - Columna &#39;V195&#39;: 74.83%
+  - Columna &#39;V196&#39;: 74.81%
+  - Columna &#39;V197&#39;: 74.83%
+  - Columna &#39;V198&#39;: 74.83%
+  - Columna &#39;V199&#39;: 74.81%
+  - Columna &#39;V200&#39;: 74.83%
+  - Columna &#39;V201&#39;: 74.83%
+  - Columna &#39;V202&#39;: 74.81%
+  - Columna &#39;V203&#39;: 74.81%
+  - Columna &#39;V204&#39;: 74.81%
+  - Columna &#39;V205&#39;: 74.81%
+  - Columna &#39;V206&#39;: 74.81%
+  - Columna &#39;V207&#39;: 74.81%
+  - Columna &#39;V208&#39;: 74.83%
+  - Columna &#39;V209&#39;: 74.83%
+  - Columna &#39;V210&#39;: 74.83%
+  - Columna &#39;V211&#39;: 74.81%
+  - Columna &#39;V212&#39;: 74.81%
+  - Columna &#39;V213&#39;: 74.81%
+  - Columna &#39;V214&#39;: 74.81%
+  - Columna &#39;V215&#39;: 74.81%
+  - Columna &#39;V216&#39;: 74.81%
+  - Columna &#39;V217&#39;: 76.56%
+  - Columna &#39;V218&#39;: 76.56%
+  - Columna &#39;V219&#39;: 76.56%
+  - Columna &#39;V220&#39;: 74.60%
+  - Columna &#39;V221&#39;: 74.60%
+  - Columna &#39;V222&#39;: 74.60%
+  - Columna &#39;V223&#39;: 76.56%
+  - Columna &#39;V224&#39;: 76.56%
+  - Columna &#39;V225&#39;: 76.56%
+  - Columna &#39;V226&#39;: 76.56%
+  - Columna &#39;V227&#39;: 74.60%
+  - Columna &#39;V228&#39;: 76.56%
+  - Columna &#39;V229&#39;: 76.56%
+  - Columna &#39;V230&#39;: 76.56%
+  - Columna &#39;V231&#39;: 76.56%
+  - Columna &#39;V232&#39;: 76.56%
+  - Columna &#39;V233&#39;: 76.56%
+  - Columna &#39;V234&#39;: 74.60%
+  - Columna &#39;V235&#39;: 76.56%
+  - Columna &#39;V236&#39;: 76.56%
+  - Columna &#39;V237&#39;: 76.56%
+  - Columna &#39;V238&#39;: 74.60%
+  - Columna &#39;V239&#39;: 74.60%
+  - Columna &#39;V240&#39;: 76.56%
+  - Columna &#39;V241&#39;: 76.56%
+  - Columna &#39;V242&#39;: 76.56%
+  - Columna &#39;V243&#39;: 76.56%
+  - Columna &#39;V244&#39;: 76.56%
+  - Columna &#39;V245&#39;: 74.60%
+  - Columna &#39;V246&#39;: 76.56%
+  - Columna &#39;V247&#39;: 76.56%
+  - Columna &#39;V248&#39;: 76.56%
+  - Columna &#39;V249&#39;: 76.56%
+  - Columna &#39;V250&#39;: 74.60%
+  - Columna &#39;V251&#39;: 74.60%
+  - Columna &#39;V252&#39;: 76.56%
+  - Columna &#39;V253&#39;: 76.56%
+  - Columna &#39;V254&#39;: 76.56%
+  - Columna &#39;V255&#39;: 74.60%
+  - Columna &#39;V256&#39;: 74.60%
+  - Columna &#39;V257&#39;: 76.56%
+  - Columna &#39;V258&#39;: 76.56%
+  - Columna &#39;V259&#39;: 74.60%
+  - Columna &#39;V260&#39;: 76.56%
+  - Columna &#39;V261&#39;: 76.56%
+  - Columna &#39;V262&#39;: 76.56%
+  - Columna &#39;V263&#39;: 76.56%
+  - Columna &#39;V264&#39;: 76.56%
+  - Columna &#39;V265&#39;: 76.56%
+  - Columna &#39;V266&#39;: 76.56%
+  - Columna &#39;V267&#39;: 76.56%
+  - Columna &#39;V268&#39;: 76.56%
+  - Columna &#39;V269&#39;: 76.56%
+  - Columna &#39;V270&#39;: 74.60%
+  - Columna &#39;V271&#39;: 74.60%
+  - Columna &#39;V272&#39;: 74.60%
+  - Columna &#39;V273&#39;: 76.56%
+  - Columna &#39;V274&#39;: 76.56%
+  - Columna &#39;V275&#39;: 76.56%
+  - Columna &#39;V276&#39;: 76.56%
+  - Columna &#39;V277&#39;: 76.56%
+  - Columna &#39;V278&#39;: 76.56%
+  - Columna &#39;V279&#39;: 0.00%
+  - Columna &#39;V280&#39;: 0.00%
+  - Columna &#39;V281&#39;: 0.67%
+  - Columna &#39;V282&#39;: 0.67%
+  - Columna &#39;V283&#39;: 0.67%
+  - Columna &#39;V284&#39;: 0.00%
+  - Columna &#39;V285&#39;: 0.00%
+  - Columna &#39;V286&#39;: 0.00%
+  - Columna &#39;V287&#39;: 0.00%
+  - Columna &#39;V288&#39;: 0.67%
+  - Columna &#39;V289&#39;: 0.67%
+  - Columna &#39;V290&#39;: 0.00%
+  - Columna &#39;V291&#39;: 0.00%
+  - Columna &#39;V292&#39;: 0.00%
+  - Columna &#39;V293&#39;: 0.00%
+  - Columna &#39;V294&#39;: 0.00%
+  - Columna &#39;V295&#39;: 0.00%
+  - Columna &#39;V296&#39;: 0.67%
+  - Columna &#39;V297&#39;: 0.00%
+  - Columna &#39;V298&#39;: 0.00%
+  - Columna &#39;V299&#39;: 0.00%
+  - Columna &#39;V300&#39;: 0.67%
+  - Columna &#39;V301&#39;: 0.67%
+  - Columna &#39;V302&#39;: 0.00%
+  - Columna &#39;V303&#39;: 0.00%
+  - Columna &#39;V304&#39;: 0.00%
+  - Columna &#39;V305&#39;: 0.00%
+  - Columna &#39;V306&#39;: 0.00%
+  - Columna &#39;V307&#39;: 0.00%
+  - Columna &#39;V308&#39;: 0.00%
+  - Columna &#39;V309&#39;: 0.00%
+  - Columna &#39;V310&#39;: 0.00%
+  - Columna &#39;V311&#39;: 0.00%
+  - Columna &#39;V312&#39;: 0.00%
+  - Columna &#39;V313&#39;: 0.67%
+  - Columna &#39;V314&#39;: 0.67%
+  - Columna &#39;V315&#39;: 0.67%
+  - Columna &#39;V316&#39;: 0.00%
+  - Columna &#39;V317&#39;: 0.00%
+  - Columna &#39;V318&#39;: 0.00%
+  - Columna &#39;V319&#39;: 0.00%
+  - Columna &#39;V320&#39;: 0.00%
+  - Columna &#39;V321&#39;: 0.00%
+  - Columna &#39;V322&#39;: 85.53%
+  - Columna &#39;V323&#39;: 85.53%
+  - Columna &#39;V324&#39;: 85.53%
+  - Columna &#39;V325&#39;: 85.53%
+  - Columna &#39;V326&#39;: 85.53%
+  - Columna &#39;V327&#39;: 85.53%
+  - Columna &#39;V328&#39;: 85.53%
+  - Columna &#39;V329&#39;: 85.53%
+  - Columna &#39;V330&#39;: 85.53%
+  - Columna &#39;V331&#39;: 85.53%
+  - Columna &#39;V332&#39;: 85.53%
+  - Columna &#39;V333&#39;: 85.53%
+  - Columna &#39;V334&#39;: 85.53%
+  - Columna &#39;V335&#39;: 85.53%
+  - Columna &#39;V336&#39;: 85.53%
+  - Columna &#39;V337&#39;: 85.53%
+  - Columna &#39;V338&#39;: 85.53%
+  - Columna &#39;V339&#39;: 85.53%
+
+Porcentaje de valores nulos en el grupo: Identidad_id
+  - Columna &#39;id_12&#39;: 73.92%
+  - Columna &#39;id_13&#39;: 76.52%
+  - Columna &#39;id_14&#39;: 86.20%
+  - Columna &#39;id_15&#39;: 74.67%
+  - Columna &#39;id_16&#39;: 76.75%
+  - Columna &#39;id_17&#39;: 74.91%
+  - Columna &#39;id_18&#39;: 91.25%
+  - Columna &#39;id_19&#39;: 74.92%
+  - Columna &#39;id_20&#39;: 74.95%
+  - Columna &#39;id_21&#39;: 99.07%
+  - Columna &#39;id_22&#39;: 99.07%
+  - Columna &#39;id_23&#39;: 99.07%
+  - Columna &#39;id_24&#39;: 99.14%
+  - Columna &#39;id_25&#39;: 99.07%
+  - Columna &#39;id_26&#39;: 99.07%
+  - Columna &#39;id_27&#39;: 99.07%
+  - Columna &#39;id_28&#39;: 74.69%
+  - Columna &#39;id_29&#39;: 74.69%
+  - Columna &#39;id_30&#39;: 86.49%
+  - Columna &#39;id_31&#39;: 74.76%
+  - Columna &#39;id_32&#39;: 86.49%
+  - Columna &#39;id_33&#39;: 86.88%
+  - Columna &#39;id_34&#39;: 86.33%
+  - Columna &#39;id_35&#39;: 74.67%
+  - Columna &#39;id_36&#39;: 74.67%
+  - Columna &#39;id_37&#39;: 74.67%
+  - Columna &#39;id_38&#39;: 74.67%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Grupos de variables por tipo funcional</span>
+<span class="n">grupos_variables</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Tiempo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;TransactionDT&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Monto&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;TransactionAmt&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Producto&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ProductCD&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Tarjetas&#39;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;card</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)],</span>
+    <span class="s1">&#39;Dirección&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;addr1&#39;</span><span class="p">,</span> <span class="s1">&#39;addr2&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Distancia&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;dist1&#39;</span><span class="p">,</span> <span class="s1">&#39;dist2&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Email&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;P_emaildomain&#39;</span><span class="p">,</span> <span class="s1">&#39;R_emaildomain&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Contadores_C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;C</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">)],</span>
+    <span class="s1">&#39;Dias_D&#39;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;D</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)],</span>
+    <span class="s1">&#39;Coincidencias_M&#39;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;M</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)],</span>
+    <span class="s1">&#39;Vesta_V&#39;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;V</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">340</span><span class="p">)],</span>
+    <span class="s1">&#39;Dispositivo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;DeviceType&#39;</span><span class="p">,</span> <span class="s1">&#39;DeviceInfo&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Identidad_id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;id_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">39</span><span class="p">)],</span>
+<span class="p">}</span>
+
+<span class="c1"># Calcular el porcentaje promedio de valores nulos por grupo</span>
+<span class="n">resumen_faltantes_promedio</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">grupo</span><span class="p">,</span> <span class="n">columnas</span> <span class="ow">in</span> <span class="n">grupos_variables</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">columnas_presentes</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columnas</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">columnas_presentes</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">total</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">resumen_faltantes_promedio</span><span class="p">[</span><span class="n">grupo</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">continue</span>
+    <span class="n">porcentajes_nulos_grupo</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">columnas_presentes</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="n">promedio_nulos</span> <span class="o">=</span> <span class="n">porcentajes_nulos_grupo</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">resumen_faltantes_promedio</span><span class="p">[</span><span class="n">grupo</span><span class="p">]</span> <span class="o">=</span> <span class="n">promedio_nulos</span>
+
+<span class="c1"># Convertir a DataFrame para graficar</span>
+<span class="n">faltantes_promedio_por_grupo_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">resumen_faltantes_promedio</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;% promedio de NaNs&#39;</span><span class="p">])</span>
+<span class="n">faltantes_promedio_por_grupo_df</span> <span class="o">=</span> <span class="n">faltantes_promedio_por_grupo_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;% promedio de NaNs&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Graficar el porcentaje promedio de nulos por grupo</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;% promedio de NaNs&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">faltantes_promedio_por_grupo_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">faltantes_promedio_por_grupo_df</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Porcentaje promedio de valores faltantes por grupo funcional&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;% promedio de valores faltantes&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Grupo de variables&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/379a8f1e6f222bc969854640228ec1aaf62bfb746724c941437b26f8e361197d.png" src="_images/379a8f1e6f222bc969854640228ec1aaf62bfb746724c941437b26f8e361197d.png" />
+</div>
+</div>
+<p><strong>Interpretación del gráfico de porcentaje promedio de valores faltantes por grupo funcional:</strong></p>
+<p>El gráfico de barras horizontales presentado ilustra el porcentaje promedio de valores faltantes para cada grupo funcional de variables dentro del conjunto de datos. En el eje vertical, se encuentran los diferentes grupos de variables definidos: ‘Contadores_C’, ‘Dias_D’, ‘Coincidencias_M’, ‘Vesta_V’, ‘Identidad_id’, ‘Tiempo’, ‘Monto’, ‘Producto’, ‘Tarjetas’, ‘Dirección’, ‘Distancia’, ‘Email’ y ‘Dispositivo’. El eje horizontal representa el porcentaje promedio de valores nulos para las columnas que componen cada grupo, con una escala que va de 0 a 100.</p>
+<p>Al observar las barras, se identifica que los grupos ‘Dias_D’ e ‘Identidad_id’ presentan los porcentajes promedio de valores faltantes más elevados. Esto sugiere que, en promedio, las columnas dentro de estos grupos tienen una cantidad considerable de datos ausentes. El grupo ‘Vesta_V’ también muestra un porcentaje promedio de nulos significativo, aunque ligeramente menor que los dos anteriores. El grupo ‘Coincidencias_M’ le sigue en la cantidad promedio de valores faltantes.</p>
+<p>Por otro lado, el grupo ‘Contadores_C’ exhibe un porcentaje promedio de valores faltantes relativamente bajo. Finalmente, los grupos ‘Tiempo’, ‘Monto’, ‘Producto’, ‘Tarjetas’, ‘Dirección’, ‘Distancia’, ‘Email’ y ‘Dispositivo’ se caracterizan por tener un porcentaje promedio de valores faltantes cercano a cero, lo que indica una alta completitud de datos en las columnas que los componen.</p>
+<p>Este gráfico proporciona una visión agregada de la magnitud de los valores faltantes por grupo de variables, ofreciendo una perspectiva más matizada que la simple indicación de si al menos una columna del grupo contenía nulos. Permite priorizar las estrategias de manejo de datos faltantes en aquellos grupos con un mayor porcentaje promedio de información ausente, como los grupos relacionados con los días transcurridos, la identidad y las variables generadas por Vesta.</p>
+</section>
+</section>
+<section id="histograma-4-variables">
+<h2>Histograma 4 variables<a class="headerlink" href="#histograma-4-variables" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+
+<span class="c1"># Variable objetivo</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;EsFraude&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribución de Fraude (0 = No, 1 = Sí)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;¿Es fraude?&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Cantidad&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Variables numéricas corregidas</span>
+<span class="n">variables_numericas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Monto&#39;</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">,</span> <span class="s1">&#39;Distancia1&#39;</span><span class="p">]</span>
+
+<span class="c1"># Histogramas</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables_numericas</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Distribución de </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bde6722b70b6ebec7a5d50ebbfec605d7b4bf46227e2439cabd6946d4ecb669e.png" src="_images/bde6722b70b6ebec7a5d50ebbfec605d7b4bf46227e2439cabd6946d4ecb669e.png" />
+<img alt="_images/0cb8f6aa47bf828a07e9330536cbfd9b8a0b291777b9efb31994d2d5a7cadc6d.png" src="_images/0cb8f6aa47bf828a07e9330536cbfd9b8a0b291777b9efb31994d2d5a7cadc6d.png" />
+<img alt="_images/6a6b6d9def374e7f0dcf825bf40fd9255507290bb78d75bea3489b2c2df09adf.png" src="_images/6a6b6d9def374e7f0dcf825bf40fd9255507290bb78d75bea3489b2c2df09adf.png" />
+<img alt="_images/f6353d029507d0b7aac2e6ce22c31f57c0e6acee027bc4ea6955e892d16885e2.png" src="_images/f6353d029507d0b7aac2e6ce22c31f57c0e6acee027bc4ea6955e892d16885e2.png" />
+<img alt="_images/c583a9b0846a0fe1900a517783f9fed2668bb4d3d8f54834072795c8f559f5d0.png" src="_images/c583a9b0846a0fe1900a517783f9fed2668bb4d3d8f54834072795c8f559f5d0.png" />
+</div>
+</div>
+<p>el gráfico revela un problema significativo de desequilibrio de clases en el contexto de la detección de fraude. La vasta mayoría de las transacciones son legítimas, mientras que las instancias de fraude son relativamente raras. Esta distribución desigual es una consideración importante al desarrollar modelos de detección de fraude, ya que los modelos pueden tender a favorecer la clase mayoritaria (no fraude) y tener dificultades para identificar correctamente las instancias minoritarias de fraude. Por lo tanto, se podrían requerir técnicas específicas para abordar este desequilibrio durante el entrenamiento del modelo.</p>
+<p>la distribución del monto de las transacciones está fuertemente concentrada en valores bajos, con una presencia muy limitada de transacciones de alto valor. Esta característica de la variable ‘Monto’ podría ser relevante para el análisis de fraude, ya que los patrones de fraude podrían estar asociados con rangos de montos específicos.</p>
+<p>la distribución de la variable ‘C1’ está altamente concentrada en sus valores más bajos, con una frecuencia decreciente a medida que los valores aumentan. Esta fuerte asimetría podría indicar la presencia de valores atípicos o una característica inherente a la forma en que se generan o registran los datos para esta variable en el contexto de la detección de fraude. Al igual que con la variable ‘Monto’</p>
+<p>la distribución de la variable ‘D1’ se caracteriza por una alta frecuencia en los valores bajos, seguida de una disminución general con algunas áreas de menor concentración en valores más altos. Esta distribución más compleja podría reflejar patrones específicos en el intervalo de tiempo representado por ‘D1’ y podría ser relevante para identificar comportamientos anómalos o fraudulentos. Es importante considerar estas características al analizar la variable ‘D1’ en el contexto del problema de detección de fraude.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Boxplots para ver outliers y simetría</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables_numericas</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;EsFraude&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1"> vs. EsFraude&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;¿Es fraude?&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/88206c8958d9453ec7f183f56b6001aa99a6f7cdd34decb2ac758ad61de09080.png" src="_images/88206c8958d9453ec7f183f56b6001aa99a6f7cdd34decb2ac758ad61de09080.png" />
+<img alt="_images/7fb1d9c2654bdd067d06b8835aa6448b04f7646fc71892f457f293e26e2a8df5.png" src="_images/7fb1d9c2654bdd067d06b8835aa6448b04f7646fc71892f457f293e26e2a8df5.png" />
+<img alt="_images/eeb208cb0af9e3fede65bd83aab74bf251f491bdf8c8508b2cf3e06e9379e97c.png" src="_images/eeb208cb0af9e3fede65bd83aab74bf251f491bdf8c8508b2cf3e06e9379e97c.png" />
+<img alt="_images/24e73a5379f7a86ea5de29dcda4ea205e6de815de950372661b74252ce10ef95.png" src="_images/24e73a5379f7a86ea5de29dcda4ea205e6de815de950372661b74252ce10ef95.png" />
+</div>
+</div>
+<p>El diagrama de cajas sugiere que, si bien la mediana del monto podría ser ligeramente mayor para las transacciones fraudulentas, ambas categorías presentan altos montos de transacción y la presencia de valores atípicos, siendo estos últimos particularmente prominentes y de mayor magnitud en las transacciones no fraudulentas. Esta visualización indica que el monto de la transacción por sí solo podría no ser un predictor definitivo de fraude, pero las diferencias en la distribución y la presencia de atípicos podrían aportar información valiosa al desarrollar modelos de detección de fraude.</p>
+<p>el diagrama de cajas sugiere que la mayoría de las transacciones, tanto fraudulentas como no fraudulentas, se caracterizan por valores bajos de ‘Distancia1’. Sin embargo, las transacciones no fraudulentas tienden a presentar valores atípicos con distancias mucho mayores en comparación con las transacciones fraudulentas. Esta diferencia en la distribución de los valores atípicos podría ser una característica útil para discriminar entre transacciones legítimas y fraudulentas en un modelo predictivo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pares</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;TransactionAmt&#39;</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;TransactionAmt&#39;</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">),</span> 
+         <span class="p">(</span><span class="s1">&#39;Distancia1&#39;</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">pares</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mf">0.2</span><span class="p">},</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s1">&#39;red&#39;</span><span class="p">})</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s1"> vs. </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bd6ae1cf45f7e0b4846e99d04ec50976444209f1ad44b222055dfe9104651f7b.png" src="_images/bd6ae1cf45f7e0b4846e99d04ec50976444209f1ad44b222055dfe9104651f7b.png" />
+<img alt="_images/3275cfbf7114ef83a151de2ec624d8d85447cfd54652bf8145299cc0cefc2678.png" src="_images/3275cfbf7114ef83a151de2ec624d8d85447cfd54652bf8145299cc0cefc2678.png" />
+</div>
+</div>
+</section>
+<section id="imputacion">
+<h2>Imputacion<a class="headerlink" href="#imputacion" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Identificar columnas con missing values</span>
+<span class="n">missing_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="c1"># 2. Excluir columnas especiales (por ahora)</span>
+<span class="n">cols_to_impute</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">missing_cols</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">,</span> <span class="s1">&#39;TransactionID&#39;</span><span class="p">,</span> <span class="s1">&#39;isTrain&#39;</span><span class="p">]]</span>
+
+<span class="c1"># 3. Imputar valores faltantes con mediana (solo numéricas)</span>
+<span class="n">median_imputer</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;median&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols_to_impute</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;int64&#39;</span><span class="p">,</span> <span class="s1">&#39;float64&#39;</span><span class="p">]:</span>
+        <span class="n">df</span><span class="p">[[</span><span class="n">col</span><span class="p">]]</span> <span class="o">=</span> <span class="n">median_imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="n">col</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mostrar columnas que aún tienen valores faltantes (si quedan)</span>
+<span class="n">missing_after</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">missing_after</span> <span class="o">=</span> <span class="n">missing_after</span><span class="p">[</span><span class="n">missing_after</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">missing_after</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Todos los valores numéricos faltantes han sido imputados correctamente.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Aún hay valores faltantes en las siguientes columnas:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">missing_after</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Aún hay valores faltantes en las siguientes columnas:
+TipoTarjeta            4663
+CategoriaTarjeta       4578
+EmailComprador       163648
+EmailReceptor        824070
+M1                   447739
+M2                   447739
+M3                   447739
+M4                   519189
+M5                   660114
+M6                   328299
+M7                   581283
+M8                   581256
+M9                   581256
+id_12                811091
+id_15                819269
+id_16                842144
+id_23               1087000
+id_27               1087000
+id_28                819475
+id_29                819475
+id_30                949007
+id_31                820324
+id_33                953271
+id_34                947251
+id_35                819269
+id_36                819269
+id_37                819269
+id_38                819269
+TipoDispositivo      819490
+InfoDispositivo      863508
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar columnas categóricas que aún tienen valores faltantes</span>
+<span class="n">categorical_missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()]</span>
+
+<span class="c1"># Imputador con moda</span>
+<span class="n">mode_imputer</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;most_frequent&#39;</span><span class="p">)</span>
+
+<span class="c1"># Aplicar imputación</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">categorical_missing</span><span class="p">:</span>
+    <span class="n">df</span><span class="p">[[</span><span class="n">col</span><span class="p">]]</span> <span class="o">=</span> <span class="n">mode_imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="n">col</span><span class="p">]])</span>
+
+<span class="c1"># Verificar nuevamente</span>
+<span class="n">missing_after_cat</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">categorical_missing</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">missing_after_cat</span> <span class="o">=</span> <span class="n">missing_after_cat</span><span class="p">[</span><span class="n">missing_after_cat</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">missing_after_cat</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Todos los valores categóricos faltantes han sido imputados correctamente.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Aún hay valores faltantes en las siguientes columnas categóricas:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">missing_after_cat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Todos los valores categóricos faltantes han sido imputados correctamente.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="reduccion-de-dimensionalidad-a-las-variables-categoricas-con-la-prueba-chi-2">
+<h2>Reducción de dimensionalidad a las variables categóricas con la prueba <span class="math notranslate nohighlight">\(chi^2\)</span><a class="headerlink" href="#reduccion-de-dimensionalidad-a-las-variables-categoricas-con-la-prueba-chi-2" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Separar variables categóricas originales (sin codificar)</span>
+<span class="n">categorical_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="c1"># 2. Aplicar prueba chi2 a cada una vs isFraud</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">chi2_contingency</span>
+
+<span class="n">significant_cat_cols</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">categorical_cols</span><span class="p">:</span>
+    <span class="n">contingency_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;EsFraude&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">contingency_table</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">contingency_table</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">continue</span>  <span class="c1"># saltar si hay solo una categoría o solo una clase</span>
+    <span class="n">chi2</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">chi2_contingency</span><span class="p">(</span><span class="n">contingency_table</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+        <span class="n">significant_cat_cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variables categóricas seleccionadas por chi²: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">significant_cat_cols</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables categóricas seleccionadas por chi²: 28
+</pre></div>
+</div>
+</div>
+</div>
+<p>28 variables categóricas son significativa con respecto a mi varibale independiente</p>
+</section>
+<section id="onehotencoder-a-las-columnas-significativas">
+<h2>OneHotEncoder a las columnas significativas<a class="headerlink" href="#onehotencoder-a-las-columnas-significativas" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Aplicar OneHotEncoder SOLO a las variables significativas</span>
+<span class="n">categorical_transformer</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;onehot&#39;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="p">])</span>
+
+<span class="c1"># Preprocesador que solo aplica OneHotEncoder a las columnas significativas</span>
+<span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+    <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="n">categorical_transformer</span><span class="p">,</span> <span class="n">significant_cat_cols</span><span class="p">)</span>
+    <span class="p">])</span>
+
+<span class="c1"># Ajustar y transformar el conjunto de datos con las variables categóricas significativas</span>
+<span class="n">X_cat_encoded</span> <span class="o">=</span> <span class="n">preprocessor</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Convertir el resultado en un DataFrame con nombres de columnas de OneHotEncoder</span>
+<span class="n">encoded_columns</span> <span class="o">=</span> <span class="n">preprocessor</span><span class="o">.</span><span class="n">transformers_</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;onehot&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">(</span><span class="n">significant_cat_cols</span><span class="p">)</span>
+<span class="n">X_cat_encoded_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_cat_encoded</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">encoded_columns</span><span class="p">)</span>
+
+<span class="c1"># Mostrar las primeras filas del DataFrame codificado</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_cat_encoded_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   TipoProducto_C  TipoProducto_H  TipoProducto_R  TipoProducto_S  \
+0             0.0             0.0             0.0             0.0   
+1             0.0             0.0             0.0             0.0   
+2             0.0             0.0             0.0             0.0   
+3             0.0             0.0             0.0             0.0   
+4             0.0             1.0             0.0             0.0   
+
+   TipoProducto_W  TipoTarjeta_american express  TipoTarjeta_discover  \
+0             1.0                           0.0                   1.0   
+1             1.0                           0.0                   0.0   
+2             1.0                           0.0                   0.0   
+3             1.0                           0.0                   0.0   
+4             0.0                           0.0                   0.0   
+
+   TipoTarjeta_mastercard  TipoTarjeta_visa  CategoriaTarjeta_charge card  \
+0                     0.0               0.0                           0.0   
+1                     1.0               0.0                           0.0   
+2                     0.0               1.0                           0.0   
+3                     1.0               0.0                           0.0   
+4                     1.0               0.0                           0.0   
+
+   ...  InfoDispositivo_verykool_s5516  InfoDispositivo_verykools4009  \
+0  ...                             0.0                            0.0   
+1  ...                             0.0                            0.0   
+2  ...                             0.0                            0.0   
+3  ...                             0.0                            0.0   
+4  ...                             0.0                            0.0   
+
+   InfoDispositivo_verykools5004  InfoDispositivo_verykools5034  \
+0                            0.0                            0.0   
+1                            0.0                            0.0   
+2                            0.0                            0.0   
+3                            0.0                            0.0   
+4                            0.0                            0.0   
+
+   InfoDispositivo_verykools5035  InfoDispositivo_verykools5036  \
+0                            0.0                            0.0   
+1                            0.0                            0.0   
+2                            0.0                            0.0   
+3                            0.0                            0.0   
+4                            0.0                            0.0   
+
+   InfoDispositivo_verykools5702  InfoDispositivo_vivo  \
+0                            0.0                   0.0   
+1                            0.0                   0.0   
+2                            0.0                   0.0   
+3                            0.0                   0.0   
+4                            0.0                   0.0   
+
+   InfoDispositivo_weimei_we  InfoDispositivo_xs-Z47b7VqTMxs  
+0                        0.0                             0.0  
+1                        0.0                             0.0  
+2                        0.0                             0.0  
+3                        0.0                             0.0  
+4                        0.0                             0.0  
+
+[5 rows x 3695 columns]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="vif">
+<h2>VIF<a class="headerlink" href="#vif" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Reducir la dimensionalidad mediante PCA (por ejemplo, para que queden 100 componentes)</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">X_pca</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_cat_encoded_df</span><span class="p">)</span>
+
+<span class="c1"># 2. Convertir el resultado de PCA a un DataFrame para calcular el VIF</span>
+<span class="n">X_pca_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_pca</span><span class="p">)</span>
+
+<span class="c1"># 3. Calcular el VIF sobre las columnas resultantes después de PCA</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_vif</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">vif_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">vif_data</span><span class="p">[</span><span class="s2">&quot;variable&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">vif_data</span><span class="p">[</span><span class="s2">&quot;VIF&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+    <span class="k">return</span> <span class="n">vif_data</span>
+
+<span class="c1"># Inicializamos VIF para las columnas generadas por PCA</span>
+<span class="n">vif_data</span> <span class="o">=</span> <span class="n">calculate_vif</span><span class="p">(</span><span class="n">X_pca_df</span><span class="p">)</span>
+
+<span class="c1"># 4. Eliminamos columnas con VIF ≥ 10 iterativamente</span>
+<span class="k">while</span> <span class="n">vif_data</span><span class="p">[</span><span class="s1">&#39;VIF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="c1"># Identificar la columna con el VIF más alto</span>
+    <span class="n">max_vif_col</span> <span class="o">=</span> <span class="n">vif_data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;VIF&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;variable&#39;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Eliminando columna: </span><span class="si">{</span><span class="n">max_vif_col</span><span class="si">}</span><span class="s2"> con VIF=</span><span class="si">{</span><span class="n">vif_data</span><span class="p">[</span><span class="s1">&#39;VIF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Eliminar la columna con el VIF más alto</span>
+    <span class="n">X_pca_df</span> <span class="o">=</span> <span class="n">X_pca_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">max_vif_col</span><span class="p">])</span>
+    
+    <span class="c1"># Recalcular VIF para las columnas restantes</span>
+    <span class="n">vif_data</span> <span class="o">=</span> <span class="n">calculate_vif</span><span class="p">(</span><span class="n">X_pca_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Corregir la ruta del directorio (usar barras invertidas dobles o cadena raw)</span>
+<span class="n">directorio_salida</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\Users\PC\Desktop\ML_trabajo\jbook_parcial\docs&quot;</span>
+<span class="c1"># Alternativa: directorio_salida = &quot;C:\\Users\\PC\\Desktop\\ML_trabajo\\jbook_parcial\\docs&quot;</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directorio_salida</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 1. Crear una nueva partición estratificada</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Creando nueva partición estratificada...&quot;</span><span class="p">)</span>
+<span class="n">train_indices</span><span class="p">,</span> <span class="n">test_indices</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> 
+    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> 
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> 
+    <span class="n">stratify</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;EsFraude&#39;</span><span class="p">]</span>  <span class="c1"># Esto garantiza que ambos conjuntos tengan ejemplos de fraude</span>
+<span class="p">)</span>
+
+<span class="c1"># 2. Actualizar la columna isTrain en el DataFrame original</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;isTrain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Primero asignar 1 a todos</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_indices</span><span class="p">,</span> <span class="s1">&#39;isTrain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Luego asignar 0 a los índices de test</span>
+
+<span class="c1"># 3. Verificar la distribución actualizada</span>
+<span class="n">train_mask</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;isTrain&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="n">test_mask</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;isTrain&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Verificando distribución después de la nueva partición:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_mask</span><span class="p">,</span> <span class="s1">&#39;EsFraude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_mask</span><span class="p">,</span> <span class="s1">&#39;EsFraude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+
+<span class="c1"># 4. Separar X e y usando las máscaras actualizadas</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_pca</span><span class="p">[</span><span class="n">train_mask</span><span class="p">]</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_pca</span><span class="p">[</span><span class="n">test_mask</span><span class="p">]</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_mask</span><span class="p">,</span> <span class="s1">&#39;EsFraude&#39;</span><span class="p">]</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_mask</span><span class="p">,</span> <span class="s1">&#39;EsFraude&#39;</span><span class="p">]</span>
+
+<span class="c1"># 5. Verificar las distribuciones de clases</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Distribución de clases en y_train:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_train</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Distribución de clases en y_test:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+
+<span class="c1"># 6. Guardar los datos particionados en PKL</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Guardando datos en formato PKL...&quot;</span><span class="p">)</span>
+
+<span class="c1"># Guardar X_train, X_test, y_train, y_test</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directorio_salida</span><span class="p">,</span> <span class="s2">&quot;X_train.pkl&quot;</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directorio_salida</span><span class="p">,</span> <span class="s2">&quot;X_test.pkl&quot;</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directorio_salida</span><span class="p">,</span> <span class="s2">&quot;y_train.pkl&quot;</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directorio_salida</span><span class="p">,</span> <span class="s2">&quot;y_test.pkl&quot;</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># También guardar el DataFrame actualizado</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directorio_salida</span><span class="p">,</span> <span class="s2">&quot;df_actualizado.pkl&quot;</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Datos guardados en </span><span class="si">{</span><span class="n">directorio_salida</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X_train: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X_test: </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;y_train: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;y_test: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Proceso completado&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Creando nueva partición estratificada...
+
+Verificando distribución después de la nueva partición:
+Train: EsFraude
+0.0    45590
+1.0    16530
+Name: count, dtype: int64
+Test: EsFraude
+0.0    11398
+1.0     4133
+Name: count, dtype: int64
+
+Distribución de clases en y_train:
+EsFraude
+0.0    45590
+1.0    16530
+Name: count, dtype: int64
+
+Distribución de clases en y_test:
+EsFraude
+0.0    11398
+1.0     4133
+Name: count, dtype: int64
+
+Guardando datos en formato PKL...
+Datos guardados en C:\Users\PC\Desktop\ML_trabajo\jbook_parcial\docs:
+X_train: (62120, 100)
+X_test: (15531, 100)
+y_train: 62120
+y_test: 15531
+ Proceso completado
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Número inicial de variables</span>
+<span class="n">n_variables_inicial</span> <span class="o">=</span> <span class="n">X_cat_encoded_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Número inicial de variables en X_cat_encoded_df: </span><span class="si">{</span><span class="n">n_variables_inicial</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Inicializamos el DataFrame para el análisis VIF con todas las variables codificadas</span>
+<span class="n">X_vif</span> <span class="o">=</span> <span class="n">X_cat_encoded_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Función para calcular el VIF</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_vif</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">vif_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">vif_data</span><span class="p">[</span><span class="s2">&quot;variable&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">vif_data</span><span class="p">[</span><span class="s2">&quot;VIF&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+    <span class="k">return</span> <span class="n">vif_data</span>
+
+<span class="c1"># Lista para almacenar las columnas eliminadas</span>
+<span class="n">columnas_eliminadas</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Calcular el VIF inicial</span>
+<span class="n">vif_data</span> <span class="o">=</span> <span class="n">calculate_vif</span><span class="p">(</span><span class="n">X_vif</span><span class="p">)</span>
+
+<span class="c1"># Eliminamos columnas con VIF ≥ 10 iterativamente</span>
+<span class="k">while</span> <span class="n">vif_data</span><span class="p">[</span><span class="s1">&#39;VIF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="c1"># Identificar la columna con el VIF más alto</span>
+    <span class="n">max_vif_col</span> <span class="o">=</span> <span class="n">vif_data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;VIF&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;variable&#39;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Eliminando columna: </span><span class="si">{</span><span class="n">max_vif_col</span><span class="si">}</span><span class="s2"> con VIF=</span><span class="si">{</span><span class="n">vif_data</span><span class="p">[</span><span class="s1">&#39;VIF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">columnas_eliminadas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">max_vif_col</span><span class="p">)</span>
+
+    <span class="c1"># Eliminar la columna con el VIF más alto del DataFrame de VIF</span>
+    <span class="n">X_vif</span> <span class="o">=</span> <span class="n">X_vif</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">max_vif_col</span><span class="p">])</span>
+
+    <span class="c1"># Recalcular VIF para las columnas restantes</span>
+    <span class="n">vif_data</span> <span class="o">=</span> <span class="n">calculate_vif</span><span class="p">(</span><span class="n">X_vif</span><span class="p">)</span>
+
+<span class="c1"># Número final de variables</span>
+<span class="n">n_variables_final</span> <span class="o">=</span> <span class="n">X_vif</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Calcular el número de variables eliminadas</span>
+<span class="n">n_variables_eliminadas</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">columnas_eliminadas</span><span class="p">)</span>
+
+<span class="c1"># Imprimir los resultados</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Número inicial de variables: </span><span class="si">{</span><span class="n">n_variables_inicial</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Número final de variables (después de eliminar por VIF): </span><span class="si">{</span><span class="n">n_variables_final</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Número de variables eliminadas por VIF: </span><span class="si">{</span><span class="n">n_variables_eliminadas</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Variables restantes después de la eliminación por VIF:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_vif</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Función para calcular VIF</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_vif</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">vif_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">vif_data</span><span class="p">[</span><span class="s2">&quot;variable&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">vif_data</span><span class="p">[</span><span class="s2">&quot;VIF&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+    <span class="k">return</span> <span class="n">vif_data</span>
+
+<span class="c1"># Suponemos que ya tienes las columnas numéricas seleccionadas</span>
+<span class="n">X_num</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">numerical_cols</span><span class="p">]</span>  <span class="c1"># Aquí van las variables numéricas de tu dataframe</span>
+
+<span class="c1"># Inicializar la lista de columnas eliminadas</span>
+<span class="n">columns_removed</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Iniciar el ciclo de iteraciones</span>
+<span class="n">iteration</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">iteration</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  <span class="c1"># Comienza el temporizador para esta iteración</span>
+    
+    <span class="c1"># Calcular VIF para las columnas actuales</span>
+    <span class="n">vif_data</span> <span class="o">=</span> <span class="n">calculate_vif</span><span class="p">(</span><span class="n">X_num</span><span class="p">)</span>
+    
+    <span class="c1"># Encontrar columnas con VIF &gt;= 10</span>
+    <span class="n">high_vif_cols</span> <span class="o">=</span> <span class="n">vif_data</span><span class="p">[</span><span class="n">vif_data</span><span class="p">[</span><span class="s1">&#39;VIF&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">][</span><span class="s1">&#39;variable&#39;</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="n">high_vif_cols</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; No hay más columnas con VIF ≥ 10. Proceso terminado.&quot;</span><span class="p">)</span>
+        <span class="k">break</span>  <span class="c1"># Si no hay columnas con VIF &gt;= 10, terminamos el ciclo</span>
+    
+    <span class="c1"># Eliminar la columna con el VIF más alto</span>
+    <span class="n">column_to_remove</span> <span class="o">=</span> <span class="n">high_vif_cols</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">X_num</span> <span class="o">=</span> <span class="n">X_num</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">column_to_remove</span><span class="p">])</span>  <span class="c1"># Eliminar la columna</span>
+    
+    <span class="c1"># Registrar la columna eliminada</span>
+    <span class="n">columns_removed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">column_to_remove</span><span class="p">)</span>
+    
+    <span class="c1"># Medir el tiempo transcurrido en esta iteración</span>
+    <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    
+    <span class="c1"># Mostrar el estado de la iteración</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iteración </span><span class="si">{</span><span class="n">iteration</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Columna eliminada: </span><span class="si">{</span><span class="n">column_to_remove</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Número de columnas restantes: </span><span class="si">{</span><span class="n">X_num</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Tiempo de esta iteración: </span><span class="si">{</span><span class="n">elapsed_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> segundos</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Al finalizar el proceso</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Proceso completado. Se eliminaron </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">columns_removed</span><span class="p">)</span><span class="si">}</span><span class="s2"> columnas.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Columnas eliminadas: </span><span class="si">{</span><span class="n">columns_removed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Parcial Aprendizaje de Máquinas - Maestría en Analítica de datos</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="notebooks.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Content with notebooks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#union-del-conjunto-de-datos">Union del conjunto de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteccion-de-fraude">Detección de fraude</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-tipos-de-variables">Resumen de Tipos de Variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#renombramiento-de-las-variables">Renombramiento de las variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estadisticas-basicas-media-desviacion-cuartiles-etc">Estadísticas Básicas (Media, Desviación, Cuartiles, etc.)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-faltantes">Valores faltantes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histograma-4-variables">Histograma 4 variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imputacion">Imputacion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-dimensionalidad-a-las-variables-categoricas-con-la-prueba-chi-2">Reducción de dimensionalidad a las variables categóricas con la prueba <span class="math notranslate nohighlight">\(chi^2\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#onehotencoder-a-las-columnas-significativas">OneHotEncoder a las columnas significativas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vif">VIF</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
