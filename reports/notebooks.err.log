@@ -30,8 +30,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['# 1. Reducir la dimensionalidad mediante PCA (por ejemplo, para que queden 100 componentes)', 'pca = PCA(n_components=100)', 'X_pca = pca.fit_transform(X_cat_encoded_df)', '', '# 2. Convertir el resultado de PCA a un DataFrame para calcular el VIF']
+['# Paso 1: Aplicar SMOTE a las variables X_train e y_train para balancear las clases', 'smote = SMOTE(random_state=42)  # Crear el objeto SMOTE', 'X_train_res, y_train_res = smote.fit_resample(X_train, y_train)  # Balancear clases', '', '# Paso 2: Modelo KNN en CPU']
 ...
-['    # Eliminar la columna con el VIF más alto', '    X_pca_df = X_pca_df.drop(columns=[max_vif_col])', '    ', '    # Recalcular VIF para las columnas restantes', '    vif_data = calculate_vif(X_pca_df)']
+["    'AUC': [roc_auc]", '})', '', '# Mostrar la tabla de resultados', 'print(results)']
 -------------------
 
